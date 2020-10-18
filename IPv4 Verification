@@ -2,7 +2,7 @@
 
 void printasbinary(int numtoprint);
 
-//void showIpAsDottedQuad(unsigned int ipAddr);
+void showIpAsDottedQuad(unsigned int ipAddr);
 
 void validateSubnetMask(unsigned int subnetMask);
 
