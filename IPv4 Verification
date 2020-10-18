@@ -1,0 +1,108 @@
+#include "stdio.h"  
+
+void printasbinary(int numtoprint);
+
+//void showIpAsDottedQuad(unsigned int ipAddr);
+
+void validateSubnetMask(unsigned int subnetMask);
+
+int main() {
+	
+	validateSubnetMask(0xffffffff);
+	validateSubnetMask(0xffff8000);
+	validateSubnetMask(0xfffc0000);
+	validateSubnetMask(0xff880000);
+	validateSubnetMask(0xffffffe0);
+
+
+	return 0;
+ }
+void printasbinary(int numtoprint) {
+	int space = 0;
+	unsigned i;
+	for (i = 1 << 31; i > 0; i = i / 2) {
+		(numtoprint & i) ? printf("1") : printf("0");
+		space++;
+		if (space % 4 == 0)
+			printf(" ");
+	}
+}
+void showIpAsDottedQuad(unsigned int ipAddr) {
+
+	printf("%d.%d.%d.%d",
+		(ipAddr >> 24) & 0x000000ff,
+		(ipAddr >> 16) & 0x000000ff,
+		(ipAddr >> 8) & 0x000000ff,
+		ipAddr & 0x000000ff
+	);
+}
+	void validateSubnetMask(unsigned int subnetMask) {
+
+		/*validateSubnetMask(0xafffafff);
+		validateSubnetMask(0xffff8000);
+		validateSubnetMask(0xfffc000);
+		validateSubnetMask(0xff880000);
+		validateSubnetMask(0xffffffe0);*/
+
+		unsigned int validateSubnet = subnetMask & 0xffffffff;
+		
+		//printasbinary(subnetMask);
+		//printf("\n");
+		//printasbinary(0x0);
+		//printf("\n");
+		printasbinary(validateSubnet);
+		printf("\n");
+
+			if (!(validateSubnet)) {
+				printf("Subnet Mask ");
+				showIpAsDottedQuad(subnetMask);
+				printf(" is valid\n");
+			}
+			else {
+				for (int x = 0; x <= 31; x++) {
+					if (x == 31) {
+						printf("Subnet Mask ");
+						showIpAsDottedQuad(subnetMask);
+						printf(" is valid\n");
+						break;
+					}
+
+					if ((validateSubnet >> x) & 0x1) {
+							continue;
+					}
+
+					else if ((validateSubnet >> x) | 0x0) {
+						int lastValue = x;
+						for (int y = lastValue; y <= 31; y++) {
+							if (y == 31) {
+								printf("Subnet Mask ");
+								showIpAsDottedQuad(subnetMask);
+								printf(" is valid\n");
+								break;
+							}
+							if ((validateSubnet >> y) | 0x0) {
+								continue;
+							}
+							else {
+								printf("Subnet Mask ");
+								showIpAsDottedQuad(subnetMask);
+								printf(" is invalid\n");
+								break;
+							}
+								
+							}
+
+							}
+
+						}
+					}
+
+			
+					
+						
+					
+						
+
+				}
+				
+				
